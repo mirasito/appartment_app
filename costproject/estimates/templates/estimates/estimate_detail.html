@@ -1,4 +1,6 @@
 {% extends "estimates/base.html" %}
+{% load static %}
+
 {% block title %}Результат расчёта{% endblock %}
 {% block content %}
 <div id="estimate-detail" class="estimate-container">
@@ -7,59 +9,69 @@
     <h1 class="estimate-title">Результат расчёта: {{ estimate.name }}</h1>
     <div class="estimate-total">
       <span class="estimate-label">Общая стоимость:</span>
-      <span class="estimate-amount">{{ estimate.total_cost|floatformat:2 }} ₽</span>
+      <span class="estimate-amount">{{ estimate.total_cost|floatformat:2 }} ₸</span>
     </div>
   </div>
 
-  <!-- Блоки каждого этапа -->
+  <!-- Блоки этапов в виде аккордеона -->
   {% for stage in estimate.stages %}
   <div class="estimate-stage">
-    <div class="stage-header">
-      <h2 class="stage-title">{{ stage.name }}</h2>
-      <span class="stage-cost">Стоимость этапа: <strong>{{ stage.cost|floatformat:2 }} ₽</strong></span>
+    <!-- Компактная шапка этапа (видна всегда) -->
+    <div class="stage-compact" onclick="toggleStageDetails({{ forloop.counter }})">
+      <div class="stage-info">
+        <h2 class="stage-title">{{ stage.name }}</h2>
+      </div>
+      <div class="stage-right">
+        <span class="stage-cost">{{ stage.cost|floatformat:2 }} ₸</span>
+        <span class="stage-arrow" id="arrow-{{ forloop.counter }}">▼</span>
+      </div>
     </div>
+    <!-- Детали этапа (скрыты по умолчанию, показываются при клике) -->
+    <div class="stage-details" id="details-{{ forloop.counter }}">
+      <div class="stage-block">
+        <h3 class="stage-subtitle">Работы</h3>
+        {% if stage.works %}
+        <ul class="work-list">
+          {% for work in stage.works %}
+          <li>
+            <span class="work-name">{{ work.name }}</span><br>
+            <span class="work-calc">{{ work.hours }} ч × {{ work.cost_per_hour|floatformat:2 }} ₸</span>
+            <span class="work-total">= <strong>{{ work.total_cost|floatformat:2 }} ₸</strong></span>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="no-items">Нет работ</p>
+        {% endif %}
+      </div>
 
-    <div class="stage-block">
-      <h3 class="stage-subtitle">Работы</h3>
-      {% if stage.works %}
-      <ul class="work-list">
-        {% for work in stage.works %}
-        <li>
-          <span class="work-name">{{ work.name }}</span><br>
-          <span class="work-calc">{{ work.hours }} ч × {{ work.cost_per_hour|floatformat:2 }} ₽</span>
-          <span class="work-total">= <strong>{{ work.total_cost|floatformat:2 }} ₽</strong></span>
-        </li>
-        {% endfor %}
-      </ul>
-      {% else %}
-      <p class="no-items">Нет работ</p>
-      {% endif %}
+      <div class="stage-block">
+        <h3 class="stage-subtitle">Материалы</h3>
+        {% if stage.materials %}
+        <ul class="material-list">
+          {% for material in stage.materials %}
+          <li>
+            <span class="material-name">{{ material.name }}</span><br>
+            <span class="material-calc">{{ material.quantity }} {{ material.unit }} × {{ material.price_per_unit|floatformat:2 }} ₸</span>
+            <span class="material-total">= <strong>{{ material.total_cost|floatformat:2 }} ₸</strong></span>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="no-items">Нет материалов</p>
+        {% endif %}
+      </div>
+      
+      <div class="stage-summary">
+        Итого по этапу: <strong>{{ stage.cost|floatformat:2 }} ₸</strong>
+      </div>
     </div>
-
-    <div class="stage-block">
-      <h3 class="stage-subtitle">Материалы</h3>
-      {% if stage.materials %}
-      <ul class="material-list">
-        {% for material in stage.materials %}
-        <li>
-          <span class="material-name">{{ material.name }}</span><br>
-          <span class="material-calc">{{ material.quantity }} {{ material.unit }} × {{ material.price_per_unit|floatformat:2 }} ₽</span>
-          <span class="material-total">= <strong>{{ material.total_cost|floatformat:2 }} ₽</strong></span>
-        </li>
-        {% endfor %}
-      </ul>
-      {% else %}
-      <p class="no-items">Нет материалов</p>
-      {% endif %}
-    </div>
-
-  </div> <!-- /estimate-stage -->
+  </div>
   {% endfor %}
 
   <!-- Блок для добавления своих элементов -->
   <div class="add-custom">
-    <a href="#" class="add-link">Добавить свой элемент</a>
+    <a href="#" class="add-link" onclick="openAddStageModal()">Добавить этап</a>
   </div>
-
-</div> <!-- /estimate-container -->
+</div>
 {% endblock %}

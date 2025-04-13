@@ -2,334 +2,325 @@
 /* 1. Сброс стилей и общие настройки  */
 /* ========================== */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: sans-serif;
-    background-color: #fff;
-    color: #000;
-  }
-  
-  /* Контейнер приложения */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #fff;
+  color: #000;
+}
+
+/* Контейнер приложения */
+#app {
+  width: 100%;
+  max-width: 480px;  /* Макс. ширина для мобильного макета */
+  margin: 0 auto;    /* Центрирование */
+  padding: 16px;
+}
+
+/* ========================== */
+/* 2. Стили экранов (Screen)  */
+/* ========================== */
+.screen {
+  display: none; /* Скрываем экраны по умолчанию */
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+.screen.active {
+  display: flex;
+}
+
+.screen h1 {
+  margin-top: 40px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.subtitle {
+  margin: 8px 0 24px;
+  text-align: center;
+  font-size: 16px;
+  color: #444;
+}
+
+/* ========================== */
+/* 3. Стили для карточек (Screen 1)  */
+/* ========================== */
+.cards {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  background-color: #F7F7F7;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.card:hover {
+  background-color: #EAEAEA;
+}
+
+.card-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.card h2 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+/* ========================== */
+/* 4. Стили для кнопок */
+/* ========================== */
+button {
+  margin-top: 16px;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #2d8cf0;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #1676d1;
+}
+
+/* Группа кнопок в формах */
+.button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.btn-primary {
+  flex: 1;
+  padding: 12px 0;
+  background-color: #2d8cf0;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #1676d1;
+}
+
+.btn-secondary {
+  flex: 1;
+  padding: 12px 0;
+  background-color: transparent;
+  border: 2px solid #2d8cf0;
+  border-radius: 8px;
+  color: #2d8cf0;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #e6f2ff;
+}
+
+/* Медиа-запрос для десктопов */
+@media screen and (min-width: 768px) {
   #app {
-    width: 100%;
-    max-width: 480px;  /* Макс. ширина для мобильного макета */
-    margin: 0 auto;    /* Центрирование */
-    padding: 16px;
+    max-width: 900px;
   }
   
-  /* ========================== */
-  /* 2. Стили экранов (Screen)  */
-  /* ========================== */
-  .screen {
-    display: none; /* Скрываем экраны по умолчанию */
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    min-height: 100vh;
-    padding: 16px;
+  #screen-1 h1 {
+    font-size: 28px;
   }
   
-  .screen.active {
-    display: flex;
-  }
-  
-  /* Заголовки экрана */
-  .screen h1 {
-    margin-top: 40px;
-    font-size: 24px;
-    text-align: center;
-  }
-  
-  .subtitle {
-    margin: 8px 0 24px;
-    text-align: center;
-    font-size: 16px;
-    color: #444;
-  }
-  
-  /* ========================== */
-  /* 3. Стили для карточек (Screen 1)  */
-  /* ========================== */
   .cards {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 24px;
   }
   
   .card {
-    background-color: #F7F7F7;
-    border-radius: 12px;
-    padding: 16px;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .card:hover {
-    background-color: #EAEAEA;
+    flex: 1;
+    margin: 0 8px;
   }
   
   .card-icon {
-    font-size: 24px;
-    margin-bottom: 8px;
+    font-size: 32px;
   }
-  
-  .card h2 {
-    font-size: 18px;
-    margin-bottom: 4px;
-  }
-  
-  /* ========================== */
-  /* 4. Кнопки */
-  /* ========================== */
-  button {
-    margin-top: 16px;
-    padding: 12px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    background-color: #2d8cf0;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #1676d1;
-  }
-  
-  /* Медиа-запрос для десктопов */
-  @media screen and (min-width: 768px) {
-    #app {
-      max-width: 900px;
-    }
-    #screen-1 h1 {
-      font-size: 28px;
-    }
-    .cards {
-      flex-direction: row;  /* Карточки в ряд */
-      justify-content: space-between;
-      gap: 24px;
-    }
-    .card {
-      flex: 1;
-      margin: 0 8px;
-    }
-    .card-icon {
-      font-size: 32px;
-    }
-  }
-  
-  /* ========================== */
-  /* 5. Стили формы и группировка полей  */
-  /* ========================== */
-  
-  /* Группировка каждого поля */
-  .form-group {
-    margin-bottom: 20px; /* Отступ между полями */
-  }
-  
-  /* Секции формы (например, «Основные параметры», «Санузлы», «Кухня») */
-  .form-section {
-    margin-bottom: 30px; /* Отступ между секциями */
-  }
-  
-  .section-title {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 12px;
-    color: #333;
-  }
-  
-  /* Стили для меток (лейблов) */
-  form label {
-    display: block;
-    font-weight: 500;  /* Более лёгкий вес для стандартных лейблов */
-    margin-bottom: 6px;
-    color: #222;
-  }
-  
-  /* Стили для полей ввода и select */
-  form input,
-  form select {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  /* ========================== */
-  /* 6. Стили переключателей (Toggle Group)  */
-  /* ========================== */
-  /* Для переключателей типа «Да/Нет» и качества материалов */
-  .toggle-group {
-    display: inline-flex;  /* Располагаем элементы в ряд */
-    gap: 12px;             /* Отступ между элементами */
-  }
-  
-  .toggle-group input[type="radio"] {
-    display: none;         /* Прячем нативные радио-кнопки */
-  }
-  
-  .toggle-group label {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 20px;
-    border: 2px solid #000;
-    border-radius: 9999px;  /* "Пилюльный" вид */
-    background-color: #fff;
-    color: #000;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .toggle-group label:hover {
-    background-color: #f0f0f0;
-  }
-  
-  .toggle-group input[type="radio"]:checked + label {
-    background-color: #000;
-    color: #fff;
-  }
-  
-  /* ========================== */
-  /* 7. Стили для подсказок (Tooltip)  */
-  /* ========================== */
-  
-  /* Контейнер для заголовка с иконкой подсказки */
-  .label-with-tooltip {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;             /* Отступ между текстом и иконкой */
-    margin-bottom: 8px;   /* Отступ снизу, чтобы следующий блок шел ниже */
-  }
-  
-  /* Контейнер подсказки */
-  .tooltip-container {
-    position: relative;
-    display: inline-block;
-    margin-left: 8px;
-    vertical-align: middle;
-  }
-  
-  /* Иконка вопроса */
-  .question-mark {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #000;
-    color: #fff;
-    font-size: 14px;
-    cursor: pointer;
-    font-weight: bold;
-    user-select: none;
-  }
-  
-  /* Окончание всплывающей подсказки */
-  .tooltip-text {
-    visibility: hidden;
-    opacity: 0;
-    width: 220px;
-    background-color: #000;
-    color: #fff;
-    text-align: left;
-    padding: 8px;
-    border-radius: 6px;
-    position: absolute;
-    z-index: 999;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: opacity 0.3s ease;
-  }
-  
-  .tooltip-text::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    border-width: 6px;
-    border-style: solid;
-    border-color: #000 transparent transparent transparent;
-    transform: translateX(-50%);
-  }
-  
-  .tooltip-container:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  /* ========================== */
-  /* 8. Стили для группы кнопок  */
-  /* ========================== */
-  .button-group {
-    display: flex;
-    gap: 12px;
-    margin-top: 20px;
-  }
-  
-  /* Основная кнопка */
-  .btn-primary {
-    flex: 1;
-    padding: 12px 0;
-    background-color: #2d8cf0;
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-primary:hover {
-    background-color: #1676d1;
-  }
-  
-  /* Вторичная кнопка */
-  .btn-secondary {
-    flex: 1;
-    padding: 12px 0;
-    background-color: transparent;
-    border: 2px solid #2d8cf0;
-    border-radius: 8px;
-    color: #2d8cf0;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .btn-secondary:hover {
-    background-color: #e6f2ff;
-  }
-  /* =============== */
-/* Стили для сметы */
-/* =============== */
+}
 
-/* Контейнер всей страницы сметы */
+/* ========================== */
+/* 5. Стили формы и группировка полей  */
+/* ========================== */
+
+/* Отступы для каждой группы поля */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Секции формы (разделение на блоки) */
+.form-section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+/* Лейблы полей */
+form label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #222;
+}
+
+/* Поля ввода и селекты */
+form input,
+form select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* ========================== */
+/* 6. Стили переключателей (Toggle Group)  */
+/* ========================== */
+.toggle-group {
+  display: inline-flex;
+  gap: 12px;
+}
+
+.toggle-group input[type="radio"] {
+  display: none;
+}
+
+.toggle-group label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
+  border: 2px solid #000;
+  border-radius: 9999px;
+  background-color: #fff;
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-group label:hover {
+  background-color: #f0f0f0;
+}
+
+.toggle-group input[type="radio"]:checked + label {
+  background-color: #000;
+  color: #fff;
+}
+
+/* ========================== */
+/* 7. Стили для подсказок (Tooltip)  */
+/* ========================== */
+.label-with-tooltip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.question-mark {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #000;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: bold;
+  user-select: none;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  width: 220px;
+  background-color: #000;
+  color: #fff;
+  text-align: left;
+  padding: 8px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 999;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease;
+}
+
+.tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  border-width: 6px;
+  border-style: solid;
+  border-color: #000 transparent transparent transparent;
+  transform: translateX(-50%);
+}
+
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ========================== */
+/* 8. Стили для страницы сметы (Estimate) */
+/* ========================== */
 .estimate-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 24px;
 }
 
-/* Шапка: заголовок сметы + общая стоимость */
 .estimate-header {
-  margin-bottom: 32px; /* отступ снизу */
+  margin-bottom: 32px;
 }
 
 .estimate-title {
@@ -351,6 +342,51 @@
   font-weight: 700;
   color: #2c3e50;
 }
+/* Таблица для материалов */
+.materials-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.materials-table th,
+.materials-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Пример модального окна */
+.modal {
+  display: none; /* скрыто по умолчанию */
+  position: fixed; 
+  z-index: 9999; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; 
+  background-color: rgba(0, 0, 0, 0.5); /* затемнение фона */
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 100px auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px; /* ширина окна */
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #999;
+}
 
 /* Карточка этапа */
 .estimate-stage {
@@ -361,41 +397,66 @@
   margin-bottom: 20px;
 }
 
-.stage-header {
+/* Компактная шапка этапа (аккордеон) */
+.stage-compact {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 10px;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+.stage-info {
+  flex: 1;
 }
 
 .stage-title {
   font-size: 20px;
   font-weight: 600;
+  margin: 0;
+}
+
+.stage-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 14px;
+  color: #333;
 }
 
 .stage-cost {
-  font-size: 16px;
-  color: #444;
+  margin-bottom: 4px;
+  font-weight: 600;
 }
 
-/* Блок внутри этапа (Работы / Материалы) */
+.stage-arrow {
+  font-size: 16px;
+  color: #999;
+}
+
+/* Детали этапа (аккордеон) */
+.stage-details {
+  display: none;
+  padding: 8px 0 16px 40px;
+  border-left: 2px solid #eee;
+}
+
 .stage-block {
-  margin-top: 16px;
+  margin-bottom: 12px;
 }
 
 .stage-subtitle {
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 6px;
-  border-left: 3px solid #2d8cf0; /* Акцентная линия слева */
+  border-left: 3px solid #2d8cf0;
   padding-left: 8px;
   color: #333;
 }
 
 .work-list, .material-list {
   list-style: none;
-  padding-left: 0;
-  margin-left: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .work-list li, .material-list li {
@@ -403,7 +464,7 @@
 }
 
 .work-name, .material-name {
-  font-weight: 600; /* название */
+  font-weight: 600;
 }
 
 .work-calc, .material-calc {
@@ -420,6 +481,12 @@
 .no-items {
   font-style: italic;
   color: #888;
+}
+
+.stage-summary {
+  font-weight: 600;
+  padding-top: 8px;
+  border-top: 1px dashed #ccc;
 }
 
 /* Ссылка для добавления элементов */
